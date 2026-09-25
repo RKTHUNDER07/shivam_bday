@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Happy Birthday Shivam :)</title>
+<style>
+  :root {
+    --warm1: #ff9a3c;
+    --warm2: #ff5e62;
+    --warm3: #ffc371;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background: #ffffff;
+    transition: background 1.2s ease;
+  }
+
+  /* ---------- INTRO SCREEN ---------- */
+  #intro {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 42px;
+    background: #ffffff;
+    z-index: 20;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+
+  #intro.hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #intro h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #222;
+    letter-spacing: 0.5px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  /* Multi-color smoothly changing button */
+  #clickMe {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 18px 46px;
+    border-radius: 999px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    background: linear-gradient(120deg, #ff5e62, #ff9966, #f7b733, #43cea2, #4facfe, #a86bff, #ff5e62);
+    background-size: 400% 400%;
+    animation: rainbowMove 6s ease infinite;
+    transition: transform 0.15s ease;
+  }
+
+  #clickMe:active {
+    transform: scale(0.94);
+  }
+
+  @keyframes rainbowMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ---------- CELEBRATION SCREEN ---------- */
+  #celebration {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+    background: radial-gradient(circle at 50% 20%, #ffe8b8 0%, #ffcf8a 35%, #ff9a6b 70%, #ff6f61 100%);
+    z-index: 10;
+  }
+
+  #celebration.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #celebration h2 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #7a2e12;
+    text-align: center;
+    padding: 0 20px;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.6);
+    animation: popIn 0.9s ease both;
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Photo frame */
+  #frame {
+    width: min(82vw, 380px);
+    height: min(58vh, 480px);
+    border-radius: 22px;
+    background: #fff8ef;
+    padding: 12px;
+    box-shadow: 0 20px 50px rgba(122, 46, 18, 0.35);
+    position: relative;
+    overflow: hidden;
+    animation: floatUp 6s ease-in-out infinite;
+  }
+
+  @keyframes floatUp {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  #frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+  }
+
+  #frame img.active {
+    opacity: 1;
+  }
+
+  #caption {
+    color: #7a2e12;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    opacity: 0.85;
+  }
+
+  /* Floating hearts / sparkles */
+  .floaty {
+    position: fixed;
+    bottom: -40px;
+    font-size: 1.4rem;
+    animation: rise linear infinite;
+    z-index: 15;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  @keyframes rise {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- INTRO -->
+  <div id="intro">
+    <h1>hbd shivam :)</h1>
+    <button id="clickMe">Click me</button>
+  </div>
+
+  <!-- CELEBRATION -->
+  <div id="celebration">
+    <h2>Happy Birthday Shivam 🎂</h2>
+    <div id="frame">
+      <img id="photo" alt="memory" />
+    </div>
+    <div id="caption">making memories, one frame at a time</div>
+  </div>
+
+  <audio id="bgm" loop preload="auto">
+    <source src="asset/audio/WhatsApp%20Audio%202026-09-25%20at%2010.24.56%20PM.aac" type="audio/aac" />
+    <source src="asset/audio/WhatsApp%20Audio%202026-09-25%20at%2010.24.56%20PM.aac" type="audio/mp4" />
+  </audio>
+
+<script>
+  const PHOTOS = [
+    "asset/photos/IMG-20250615-WA0025.jpg",
+    "asset/photos/IMG-20250810-WA0014.jpg",
+    "asset/photos/IMG-20250908-WA0044.jpg",
+    "asset/photos/IMG-20260128-WA0010.jpg",
+    "asset/photos/IMG-20260717-WA0053.jpeg",
+    "asset/photos/IMG_20260704_220718.jpg",
+    "asset/photos/Screenshot_2026-01-17-18-05-52-050_com.google.android.apps.photos.png",
+    "asset/photos/Screenshot_2026-08-23-08-26-35-120_com.linkedin.android.jpg",
+    "asset/photos/Snapchat-106183980.jpg",
+    "asset/photos/Snapchat-2090932200.jpg"
+  ];
+
+  const intro = document.getElementById("intro");
+  const celebration = document.getElementById("celebration");
+  const photoEl = document.getElementById("photo");
+  const bgm = document.getElementById("bgm");
+  const clickMe = document.getElementById("clickMe");
+
+  let index = 0;
+  let slideshow = null;
+  let floaters = null;
+
+  function showPhoto(i) {
+    const img = new Image();
+    img.onload = () => {
+      photoEl.classList.remove("active");
+      setTimeout(() => {
+        photoEl.src = img.src;
+        photoEl.classList.add("active");
+      }, 250);
+    };
+    img.src = PHOTOS[i];
+  }
+
+  function startSlideshow() {
+    showPhoto(index);
+    slideshow = setInterval(() => {
+      index = (index + 1) % PHOTOS.length;
+      showPhoto(index);
+    }, 3200);
+  }
+
+  function spawnFloaty() {
+    const items = ["💛", "🎉", "✨", "🧡", "🎈", "💖", "🌟"];
+    const el = document.createElement("div");
+    el.className = "floaty";
+    el.textContent = items[Math.floor(Math.random() * items.length)];
+    el.style.left = Math.random() * 92 + "vw";
+    el.style.animationDuration = 5 + Math.random() * 4 + "s";
+    el.style.fontSize = 1 + Math.random() * 1.2 + "rem";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 10000);
+  }
+
+  function startFloaters() {
+    for (let i = 0; i < 6; i++) setTimeout(spawnFloaty, i * 400);
+    floaters = setInterval(spawnFloaty, 1100);
+  }
+
+  clickMe.addEventListener("click", () => {
+    intro.classList.add("hide");
+
+    const playPromise = bgm.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(() => {
+        const resume = () => {
+          bgm.play();
+          document.removeEventListener("touchstart", resume);
+          document.removeEventListener("click", resume);
+        };
+        document.addEventListener("touchstart", resume);
+        document.addEventListener("click", resume);
+      });
+    }
+
+    setTimeout(() => {
+      celebration.classList.add("show");
+      startSlideshow();
+      startFloaters();
+    }, 450);
+  });
+</script>
+</body>
+</html>
